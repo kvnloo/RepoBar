@@ -3,6 +3,22 @@
     <channel>
         <title>RepoBar</title>
         <item>
+            <title>0.9.0</title>
+            <pubDate>Mon, 07 Sep 2026 01:59:10 -0700</pubDate>
+            <link>https://raw.githubusercontent.com/steipete/RepoBar/main/appcast.xml</link>
+            <sparkle:version>30</sparkle:version>
+            <sparkle:shortVersionString>0.9.0</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
+            <description><![CDATA[<h2>RepoBar 0.9.0</h2>
+<p><strong>Highlights:</strong> RepoBar now follows your macOS language preference with Turkish menus and common Settings controls.</p>
+<ul>
+<li>Add Turkish translations for macOS menu actions, Settings tabs, repository visibility controls, and Display customization, with English fallback and unchanged CLI output (thanks @husodrn46). (#114)</li>
+</ul>
+<p><a href="https://github.com/steipete/RepoBar/blob/main/CHANGELOG.md">View full changelog</a></p>
+]]></description>
+            <enclosure url="https://github.com/steipete/RepoBar/releases/download/v0.9.0/RepoBar-0.9.0.zip" length="26709862" type="application/octet-stream" sparkle:edSignature="PjqaT/0fuFCkG7TszV7CIusnAqCnF8GaumQbYAd+LrUMixorzcb0ljdPX8nV8m7ovgBeoF6ytyKatC6hdcxRBw=="/>
+        </item>
+        <item>
             <title>0.8.8</title>
             <pubDate>Sun, 06 Sep 2026 18:34:11 -0700</pubDate>
             <link>https://raw.githubusercontent.com/steipete/RepoBar/main/appcast.xml</link>
