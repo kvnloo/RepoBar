@@ -71,11 +71,17 @@ RESOURCE_BUNDLE="${BUILD_DIR}/${APP_NAME}_${APP_NAME}.bundle"
 if [ -d "${RESOURCE_BUNDLE}" ] && [ -n "$(find "${RESOURCE_BUNDLE}" -type f -print -quit 2>/dev/null || true)" ]; then
   log "==> Installing resources: $(basename "${RESOURCE_BUNDLE}")"
   if command -v ditto >/dev/null 2>&1; then
-    ditto "${RESOURCE_BUNDLE}" "${APP_BUNDLE}/$(basename "${RESOURCE_BUNDLE}")"
+    ditto "${RESOURCE_BUNDLE}" "${APP_BUNDLE}/Contents/Resources/$(basename "${RESOURCE_BUNDLE}")"
   else
-    cp -R "${RESOURCE_BUNDLE}" "${APP_BUNDLE}/"
+    cp -R "${RESOURCE_BUNDLE}" "${APP_BUNDLE}/Contents/Resources/"
   fi
 fi
+
+# SwiftUI resolves implicit localized keys in the main application bundle.
+for LOCALIZATION in en tr; do
+  ditto "${ROOT_DIR}/Sources/RepoBar/Resources/Localizations/${LOCALIZATION}.lproj" \
+    "${APP_BUNDLE}/Contents/Resources/${LOCALIZATION}.lproj"
+done
 
 if [ -f "${ICON_TARGET}" ]; then
   log "==> Installing app icon"
@@ -112,6 +118,7 @@ cat > "${INFO_PLIST}" <<PLIST
     <key>CFBundleIdentifier</key><string>${BUNDLE_IDENTIFIER}</string>
     <key>CFBundleExecutable</key><string>${APP_NAME}</string>
     <key>CFBundlePackageType</key><string>APPL</string>
+    <key>CFBundleDevelopmentRegion</key><string>en</string>
     <key>LSMinimumSystemVersion</key><string>15.0</string>
     <key>CFBundleShortVersionString</key><string>${MARKETING_VERSION}</string>
     <key>CFBundleVersion</key><string>${BUILD_NUMBER}</string>
