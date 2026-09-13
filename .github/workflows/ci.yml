@@ -16,7 +16,7 @@ concurrency:
 jobs:
   macos:
     name: macOS (Xcode 26.1)
-    runs-on: macos-latest
+    runs-on: macos-26
     timeout-minutes: 35
     steps:
       - name: Checkout
@@ -74,6 +74,18 @@ jobs:
 
       - name: Run checks
         run: pnpm check
+
+      - name: Select Xcode for iOS
+        uses: maxim-lobanov/setup-xcode@ed7a3b1fda3918c0306d1b724322adc0b8cc0a90 # v1.7.0
+        with:
+          xcode-version: '26.6'
+
+      - name: Build iOS app and tests
+        run: |
+          xcodebuild -project RepoBariOS/RepoBariOS.xcodeproj -scheme RepoBariOS \
+            -configuration Debug -destination 'generic/platform=iOS Simulator' \
+            -derivedDataPath "$RUNNER_TEMP/repobar-ios" \
+            ARCHS="$(uname -m)" ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO build-for-testing
 
       - name: Verify formatting and lockfiles are unchanged
         run: git diff --exit-code
